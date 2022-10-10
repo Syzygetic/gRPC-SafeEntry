@@ -1,0 +1,153 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package safeentry;
+
+// The safeentry service definition.
+service Safeentry {
+  rpc Register (RegisterRequest) returns (RegisterReply) {}
+  rpc Login (LoginRequest) returns (LoginReply) {}
+  rpc MOHLogin (MOHLoginRequest) returns (MOHLoginReply) {}
+  rpc DeclareCovidCase (DeclareCovidCaseRequest) returns (DeclareCovidCaseReply) {}
+  rpc CheckIn (CheckInRequest) returns (CheckInReply) {}
+  rpc CheckOut (CheckOutRequest) returns (CheckOutReply) {}
+  rpc CheckInFamily (stream CheckInFamilyRequest) returns (CheckInFamilyReply) {}
+  rpc CheckOutFamily (stream CheckOutFamilyRequest) returns (CheckOutFamilyReply) {}
+  rpc ListLocationsHistory (ListLocationsHistoryRequest) returns (stream ListLocationsHistoryReply) {}
+  rpc CheckCovidExposure (CheckCovidExposureRequest) returns (stream CheckCovidExposureReply) {}
+}
+
+// The register request message containing the user's nric, name
+message RegisterRequest {
+  string nric = 1;
+  string name = 2;
+}
+
+// The register response message containing the register result
+message RegisterReply {
+  string registerresponse = 1;
+}
+
+// The login request message containing the user's nric
+message LoginRequest {
+  string nric = 1;
+}
+
+// The login response message containing the login result
+message LoginReply {
+  string loginresponse = 1;
+  string loginusername = 2;
+}
+
+// The MOH login request message containing the MOH officer's login id, login password
+message MOHLoginRequest {
+  string id = 1;
+  string password = 2;
+}
+
+// The MOH login response message containing the login result, status
+message MOHLoginReply {
+  string mohloginresponse = 1;
+  string loginstatus = 2;
+}
+
+// The DeclareCovidCase request message containing the Covid-19 Case location, date, time
+message DeclareCovidCaseRequest {
+  string location = 1;
+  string date = 2;
+  string time = 3;
+}
+
+// The DeclareCovidCase response message containing the DeclareCovidCase result
+message DeclareCovidCaseReply {
+  string declarecovidcaseresponse = 1;
+}
+
+// The check-in request message containing the check-in user's name, nric, location, date, time
+message CheckInRequest {
+  string name = 1;
+  string nric = 2;
+  string location = 3;
+  string date = 4;
+  string time = 5;
+}
+
+// The check-in response message containing the check-in result
+message CheckInReply {
+  string checkinresponse = 1;
+}
+
+// The check-out request message containing the check-out user's name, nric, location, date, time
+message CheckOutRequest {
+  string name = 1;
+  string nric = 2;
+  string location = 3;
+  string date = 4;
+  string time = 5;
+}
+
+// The check-out response message containing the check-out result
+message CheckOutReply {
+  string checkoutresponse = 1;
+}
+
+// The check-in family request message containing the check-in family members' name, nric, location, date, time
+message CheckInFamilyRequest {
+  string name = 1;
+  string nric = 2;
+  string location = 3;
+  string date = 4;
+  string time = 5;
+}
+
+// The check-in family response message containing the check-in family result
+message CheckInFamilyReply {
+  string checkinfamilyresponse = 1;
+}
+
+// The check-out family request message containing the check-out family members' name, nric, location, date, time
+message CheckOutFamilyRequest {
+  string name = 1;
+  string nric = 2;
+  string location = 3;
+  string date = 4;
+  string time = 5;
+}
+
+// The check-out family response message containing the check-out family result
+message CheckOutFamilyReply {
+  string checkoutfamilyresponse = 1;
+}
+
+// The ListLocationsHistory request message containing the ListLocationsHistory user's nric
+message ListLocationsHistoryRequest {
+  string nric = 1;
+}
+
+// The ListLocationsHistory response message containing the ListLocationsHistory result
+message ListLocationsHistoryReply {
+  string listlocationshistoryresponse = 1;
+}
+
+// The CheckCovidExposure request message containing the CheckCovidExposure user's nric
+message CheckCovidExposureRequest {
+  string nric = 1;
+}
+
+// The CheckCovidExposure response message containing the CheckCovidExposure result
+message CheckCovidExposureReply {
+  string checkcovidexposureresponse = 1;
+}
